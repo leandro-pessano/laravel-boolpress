@@ -14,10 +14,19 @@ class PostSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 5; $i++) { 
             $newPost = new Post();
             $newPost->title = $faker->sentence(4);
-            $newPost->slug = Str::slug($newPost->title);
+
+            $tempSlug = Str::slug($newPost->title);
+            $slug = $tempSlug;
+            $counter = 1;
+            while (Post::where('slug', $slug)->first()) {
+                $slug = $tempSlug .'-' .$counter;
+                $counter++;
+            }
+
+            $newPost->slug = $slug;
             $newPost->content = $faker->text(100);
             $newPost->save();
         }
