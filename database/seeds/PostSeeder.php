@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use App\Post;
+use App\User;
 
 class PostSeeder extends Seeder
 {
@@ -28,6 +29,7 @@ class PostSeeder extends Seeder
 
             $newPost->slug = $slug;
             $newPost->content = $faker->text(100);
+            $newPost->user_id = rand(1,Count(User::all()->toArray()));
             $newPost->save();
         }
     }
