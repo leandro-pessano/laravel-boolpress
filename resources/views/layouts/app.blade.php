@@ -71,7 +71,9 @@
                 </div>
             </div>
         </nav>
-
+        @if (Route::has('register'))
+        @include('admin.partials.header')
+        @endif
         <main class="py-4">
             @yield('content')
         </main>
